@@ -43,6 +43,7 @@ class Tests_Funciones:
         except TimeoutException as ex:
             print(ex.msg)
             print("No se encontro el elemento: " + xpath)
+            
     def Texto_Id(self, id, texto, tiempo):
         try:
             driver = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.ID, id)))
