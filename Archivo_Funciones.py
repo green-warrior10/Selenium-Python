@@ -85,44 +85,21 @@ class Tests_Funciones:
             print(ex.msg)
             print("No se encontro el elemento: " + id)
 
-    def Select_Xpath_Text(self, xpath, texto, tiempo):
+    def Select_Xpath_Type(self, xpath, tipo, dato, tiempo):
         try:
             driver = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH, xpath)))
             self.driver.execute_script("arguments[0].scrollIntoView();", driver)
             driver = self.driver.find_element(By.XPATH, xpath)
             driver = Select(driver)
-            driver.select_by_visible_text(texto)
-            print("El campo seleccionado es -> {}".format(texto))
+            if (tipo == "text" or "texto"):
+                driver.select_by_visible_text(dato)
+            elif (tipo == "index" or "indice"):
+                driver.select_by_index(dato)
+            elif (tipo == "value" or "valor"):
+                driver.select_by_value(dato)
+            print("El campo seleccionado es -> {}".format(dato))
             t = time.sleep(tiempo)
-            return xpath, texto, t
+            return xpath, tipo, dato, t
         except TimeoutException as ex:
             print(ex.msg)
-            print("No se encontro el elemento: " + texto)
-
-    def Select_Xpath_Value(self, xpath, value, tiempo):
-        try:
-            driver = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH, xpath)))
-            self.driver.execute_script("arguments[0].scrollIntoView();", driver)
-            driver = self.driver.find_element(By.XPATH, xpath)
-            driver = Select(driver)
-            driver.select_by_value(value)
-            print("El campo seleccionado es -> {}".format(value))
-            t = time.sleep(tiempo)
-            return xpath, value, t
-        except TimeoutException as ex:
-            print(ex.msg)
-            print("No se encontro el elemento: " + value)
-
-    def Select_Xpath_Index(self, xpath, index, tiempo):
-        try:
-            driver = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH, xpath)))
-            self.driver.execute_script("arguments[0].scrollIntoView();", driver)
-            driver = self.driver.find_element(By.XPATH, xpath)
-            driver = Select(driver)
-            driver.select_by_index(index)
-            print("El campo seleccionado es -> {}".format(index))
-            t = time.sleep(tiempo)
-            return xpath, index, t
-        except TimeoutException as ex:
-            print(ex.msg)
-            print("No se encontro el elemento: " + index)
+            print("No se encontro el elemento: " + xpath)
