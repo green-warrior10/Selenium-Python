@@ -103,3 +103,16 @@ class Tests_Funciones:
         except TimeoutException as ex:
             print(ex.msg)
             print("No se encontro el elemento: " + xpath)
+
+    def Upload_Xpath(self, xpath, archivo, tiempo):
+        try:
+            driver = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH, xpath)))
+            self.driver.execute_script("arguments[0].scrollIntoView();", driver)
+            driver = self.driver.find_element(By.XPATH, xpath)
+            driver.send_keys(archivo)
+            print("Se esta mandando el archivo -> {}".format(archivo))
+            t = time.sleep(tiempo)
+            return xpath, archivo, t
+        except TimeoutException as ex:
+            print(ex.msg)
+            print("No se encontro el elemento: " + xpath)
