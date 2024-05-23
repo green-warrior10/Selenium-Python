@@ -41,7 +41,7 @@ class Tests_Funciones:
             driver.send_keys(texto)
             print("Se esta mandando al campo {} el texto -> {}".format(xpath, texto))
             t = time.sleep(tiempo)
-            return xpath, texto, t
+            return t
         except TimeoutException as ex:
             print(ex.msg)
             print("No se encontro el elemento: " + xpath)
@@ -54,7 +54,7 @@ class Tests_Funciones:
             driver.send_keys(texto)
             print("Se esta mandando al campo {} el texto -> {}".format(id, texto))
             t = time.sleep(tiempo)
-            return id, texto, t
+            return t
         except TimeoutException as ex:
             print(ex.msg)
             print("No se encontro el elemento: " + id)
@@ -67,7 +67,7 @@ class Tests_Funciones:
             driver.click()
             print("Se esta dando click a -> {}".format(xpath))
             t = time.sleep(tiempo)
-            return xpath, t
+            return t
         except TimeoutException as ex:
             print(ex.msg)
             print("No se encontro el elemento: " + xpath)
@@ -80,7 +80,7 @@ class Tests_Funciones:
             driver.click()
             print("Se esta dando click a -> {}".format(id))
             t = time.sleep(tiempo)
-            return id, t
+            return t
         except TimeoutException as ex:
             print(ex.msg)
             print("No se encontro el elemento: " + id)
@@ -99,7 +99,7 @@ class Tests_Funciones:
                 driver.select_by_value(dato)
             print("El campo seleccionado es -> {}".format(dato))
             t = time.sleep(tiempo)
-            return xpath, tipo, dato, t
+            return t
         except TimeoutException as ex:
             print(ex.msg)
             print("No se encontro el elemento: " + xpath)
@@ -118,7 +118,7 @@ class Tests_Funciones:
                 driver.select_by_value(dato)
             print("El campo seleccionado es -> {}".format(dato))
             t = time.sleep(tiempo)
-            return id, tipo, dato, t
+            return t
         except TimeoutException as ex:
             print(ex.msg)
             print("No se encontro el elemento: " + id)
@@ -131,7 +131,7 @@ class Tests_Funciones:
             driver.send_keys(archivo)
             print("Se esta mandando el archivo -> {}".format(archivo))
             t = time.sleep(tiempo)
-            return xpath, archivo, t
+            return t
         except TimeoutException as ex:
             print(ex.msg)
             print("No se encontro el elemento: " + xpath)
@@ -144,7 +144,7 @@ class Tests_Funciones:
             driver.send_keys(archivo)
             print("Se esta mandando el archivo -> {}".format(archivo))
             t = time.sleep(tiempo)
-            return id, archivo, t
+            return t
         except TimeoutException as ex:
             print(ex.msg)
             print("No se encontro el elemento: " + id)
@@ -157,7 +157,20 @@ class Tests_Funciones:
             driver.click()
             print("Se esta haciendo click en el elemento -> {}".format(xpath))
             t = time.sleep(tiempo)
-            return xpath, t
+            return t
         except TimeoutException as ex:
             print(ex.msg)
             print("No se encontro el elemento: " + xpath)
+
+    def Checkbox_Id(self, id, tiempo):
+        try:
+            driver = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.ID, id)))
+            self.driver.execute_script("arguments[0].scrollIntoView();", driver)
+            driver = self.driver.find_element(By.ID, id)
+            driver.click()
+            print("Se esta haciendo click en el elemento -> {}".format(id))
+            t = time.sleep(tiempo)
+            return t
+        except TimeoutException as ex:
+            print(ex.msg)
+            print("No se encontro el elemento: " + id)
