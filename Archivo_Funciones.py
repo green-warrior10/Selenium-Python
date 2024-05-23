@@ -91,11 +91,11 @@ class Tests_Funciones:
             self.driver.execute_script("arguments[0].scrollIntoView();", driver)
             driver = self.driver.find_element(By.XPATH, xpath)
             driver = Select(driver)
-            if (tipo == "text" or "texto"):
+            if (tipo == "text"):
                 driver.select_by_visible_text(dato)
-            elif (tipo == "index" or "indice"):
+            elif (tipo == "index"):
                 driver.select_by_index(dato)
-            elif (tipo == "value" or "valor"):
+            elif (tipo == "value"):
                 driver.select_by_value(dato)
             print("El campo seleccionado es -> {}".format(dato))
             t = time.sleep(tiempo)
@@ -103,6 +103,25 @@ class Tests_Funciones:
         except TimeoutException as ex:
             print(ex.msg)
             print("No se encontro el elemento: " + xpath)
+
+    def Select_Id_Type(self, id, tipo, dato, tiempo):
+        try:
+            driver = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.ID, id)))
+            self.driver.execute_script("arguments[0].scrollIntoView();", driver)
+            driver = self.driver.find_element(By.ID, id)
+            driver = Select(driver)
+            if (tipo == "text"):
+                driver.select_by_visible_text(dato)
+            elif (tipo == "index"):
+                driver.select_by_index(dato)
+            elif (tipo == "value"):
+                driver.select_by_value(dato)
+            print("El campo seleccionado es -> {}".format(dato))
+            t = time.sleep(tiempo)
+            return id, tipo, dato, t
+        except TimeoutException as ex:
+            print(ex.msg)
+            print("No se encontro el elemento: " + id)
 
     def Upload_Xpath(self, xpath, archivo, tiempo):
         try:
@@ -113,6 +132,32 @@ class Tests_Funciones:
             print("Se esta mandando el archivo -> {}".format(archivo))
             t = time.sleep(tiempo)
             return xpath, archivo, t
+        except TimeoutException as ex:
+            print(ex.msg)
+            print("No se encontro el elemento: " + xpath)
+
+    def Upload_Id(self, id, archivo, tiempo):
+        try:
+            driver = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.ID, id)))
+            self.driver.execute_script("arguments[0].scrollIntoView();", driver)
+            driver = self.driver.find_element(By.ID, id)
+            driver.send_keys(archivo)
+            print("Se esta mandando el archivo -> {}".format(archivo))
+            t = time.sleep(tiempo)
+            return id, archivo, t
+        except TimeoutException as ex:
+            print(ex.msg)
+            print("No se encontro el elemento: " + id)
+
+    def Checkbox_Xpath(self, xpath, tiempo):
+        try:
+            driver = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH, xpath)))
+            self.driver.execute_script("arguments[0].scrollIntoView();", driver)
+            driver = self.driver.find_element(By.XPATH, xpath)
+            driver.click()
+            print("Se esta haciendo click en el elemento -> {}".format(xpath))
+            t = time.sleep(tiempo)
+            return xpath, t
         except TimeoutException as ex:
             print(ex.msg)
             print("No se encontro el elemento: " + xpath)
