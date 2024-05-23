@@ -33,31 +33,31 @@ class Tests_Funciones:
         t = time.sleep(tiempo)
         return t
 
-    def Texto_Xpath(self, xpath, texto, tiempo):
-        try:
-            driver = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH, xpath)))
-            self.driver.execute_script("arguments[0].scrollIntoView();", driver)
-            driver = self.driver.find_element(By.XPATH, xpath)
-            driver.send_keys(texto)
-            print("Se esta mandando al campo {} el texto -> {}".format(xpath, texto))
-            t = time.sleep(tiempo)
-            return t
-        except TimeoutException as ex:
-            print(ex.msg)
-            print("No se encontro el elemento: " + xpath)
-
-    def Texto_Id(self, id, texto, tiempo):
-        try:
-            driver = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.ID, id)))
-            self.driver.execute_script("arguments[0].scrollIntoView();", driver)
-            driver = self.driver.find_element(By.ID, id)
-            driver.send_keys(texto)
-            print("Se esta mandando al campo {} el texto -> {}".format(id, texto))
-            t = time.sleep(tiempo)
-            return t
-        except TimeoutException as ex:
-            print(ex.msg)
-            print("No se encontro el elemento: " + id)
+        def Texto (self, tipo, selector, texto, tiempo):
+        if (tipo == "xpath"):
+            try:
+                driver = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH, selector)))
+                self.driver.execute_script("arguments[0].scrollIntoView();", driver)
+                driver = self.driver.find_element(By.XPATH, selector)
+                driver.send_keys(texto)
+                print("Se esta mandando al campo {} el texto -> {}".format( selector, texto))
+                t = time.sleep(tiempo)
+                return t
+            except TimeoutException as ex:
+                print(ex.msg)
+                print("No se encontro el elemento: " + selector)
+        if (tipo == "id"):
+            try:
+                driver = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.ID, selector)))
+                self.driver.execute_script("arguments[0].scrollIntoView();", driver)
+                driver = self.driver.find_element(By.ID, selector)
+                driver.send_keys(texto)
+                print("Se esta mandando al campo {} el texto -> {}".format(selector, texto))
+                t = time.sleep(tiempo)
+                return t
+            except TimeoutException as ex:
+                print(ex.msg)
+                print("No se encontro el elemento: " + selector)
 
     def Click_Xpath(self, xpath, tiempo):
         try:
