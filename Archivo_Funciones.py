@@ -174,3 +174,18 @@ class Tests_Funciones:
         except TimeoutException as ex:
             print(ex.msg)
             print("No se encontro el elemento: " + id)
+
+    def Checkbox_Multiple_Xpath(self, tiempo, *args):
+        try:
+            for i in args:
+                driver = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH, i)))
+                self.driver.execute_script("arguments[0].scrollIntoView();", driver)
+                driver = self.driver.find_element(By.XPATH, i)
+                driver.click()
+                print("Se esta haciendo click en el elemento -> {}".format(i))
+                t = time.sleep(tiempo)
+                return t
+        except TimeoutException as ex:
+            for i in args:
+                print(ex.msg)
+                print("No se encontro el elemento: " + i)
