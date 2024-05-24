@@ -39,6 +39,7 @@ class Tests_Funciones:
                 driver = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH, selector)))
                 self.driver.execute_script("arguments[0].scrollIntoView();", driver)
                 driver = self.driver.find_element(By.XPATH, selector)
+                driver.clear()
                 driver.send_keys(texto)
                 print("Se esta mandando al campo {} el texto -> {}".format( selector, texto))
                 t = time.sleep(tiempo)
@@ -51,6 +52,7 @@ class Tests_Funciones:
                 driver = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.ID, selector)))
                 self.driver.execute_script("arguments[0].scrollIntoView();", driver)
                 driver = self.driver.find_element(By.ID, selector)
+                driver.clear()
                 driver.send_keys(texto)
                 print("Se esta mandando al campo {} el texto -> {}".format(selector, texto))
                 t = time.sleep(tiempo)
@@ -189,3 +191,27 @@ class Tests_Funciones:
             for i in args:
                 print(ex.msg)
                 print("No se encontro el elemento: " + i)
+
+    def Validacion(self, tipo, selector, tiempo):
+        if (tipo == "xpath"):
+            try:
+                driver = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH, selector)))
+                self.driver.execute_script("arguments[0].scrollIntoView();", driver)
+                self.driver.find_element(By.XPATH, selector)
+                print("Se esta dando click a -> {}".format(selector))
+                t = time.sleep(tiempo)
+                return "True"
+            except TimeoutException as ex:
+                print(ex.msg)
+                print("No se encontro el elemento: " + selector)
+        if (tipo == "id"):
+            try:
+                driver = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.ID, selector)))
+                self.driver.execute_script("arguments[0].scrollIntoView();", driver)
+                self.driver.find_element(By.ID, selector)
+                print("Se esta dando click a -> {}".format(selector))
+                t = time.sleep(tiempo)
+                return "True"
+            except TimeoutException as ex:
+                print(ex.msg)
+                print("No se encontro el elemento: " + selector)
