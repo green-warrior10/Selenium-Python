@@ -246,3 +246,55 @@ class Tests_Funciones:
             except TimeoutException as ex:
                 print(ex.msg)
                 print("No se encontro el elemento: " + selector)
+
+    def Mouse_drag_drop(self, tipo, selector, destino, tiempo):
+        if (tipo == "xpath"):
+            try:
+                driver = self.Selector_Xpath(selector)
+                destino = self.Selector_Xpath(destino)
+                print("Se esta arrastrando el elemento {} a -> {}".format(selector, destino))
+                mouse = ActionChains(self.driver)
+                mouse.drag_and_drop(driver, destino).perform()
+                t = time.sleep(tiempo)
+                return t
+            except TimeoutException as ex:
+                print(ex.msg)
+                print("No se encontro el elemento: " + selector)
+        if (tipo == "id"):
+            try:
+                driver = self.Selector_Id(selector)
+                destino = self.Selector_Xpath(destino)
+                print("Se esta arrastrando el elemento {} a -> {}".format(selector, destino))
+                mouse = ActionChains(self.driver)
+                mouse.drag_and_drop(driver, destino).perform()
+                t = time.sleep(tiempo)
+                return t
+            except TimeoutException as ex:
+                print(ex.msg)
+                print("No se encontro el elemento: " + selector)
+
+    def Mouse_drag_drop_xy(self, tipo, selector, x, y, tiempo):
+        if (tipo == "xpath"):
+            try:
+                # self.driver.switch_to.frame(0) en caso de tener iframes
+                driver = self.Selector_Xpath(selector)
+                print("Se esta arrastrando el elemento -> {}".format(selector))
+                mouse = ActionChains(self.driver)
+                mouse.drag_and_drop_by_offset(driver, x, y).perform()
+                t = time.sleep(tiempo)
+                return t
+            except TimeoutException as ex:
+                print(ex.msg)
+                print("No se encontro el elemento: " + selector)
+        if (tipo == "id"):
+            try:
+                # self.driver.switch_to.frame(0) en caso de tener iframes
+                driver = self.Selector_Id(selector)
+                print("Se esta arrastrando el elemento -> {}".format(selector))
+                mouse = ActionChains(self.driver)
+                mouse.drag_and_drop_by_offset(driver, x, y).perform()
+                t = time.sleep(tiempo)
+                return t
+            except TimeoutException as ex:
+                print(ex.msg)
+                print("No se encontro el elemento: " + selector)
