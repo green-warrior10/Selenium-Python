@@ -298,3 +298,55 @@ class Tests_Funciones:
             except TimeoutException as ex:
                 print(ex.msg)
                 print("No se encontro el elemento: " + selector)
+
+    def Mouse_Click_xy(self, tipo, selector, x, y, tiempo):
+        if (tipo == "xpath"):
+            try:
+                # self.driver.switch_to.frame(0) en caso de tener iframes
+                driver = self.Selector_Xpath(selector)
+                print("Clicl en {} coordenadas {} , {}".format(selector, x, y))
+                mouse = ActionChains(self.driver)
+                mouse.move_to_element_with_offset(driver, x, y).click().perform()
+                t = time.sleep(tiempo)
+                return t
+            except TimeoutException as ex:
+                print(ex.msg)
+                print("No se encontro el elemento: " + selector)
+        if (tipo == "id"):
+            try:
+                # self.driver.switch_to.frame(0) en caso de tener iframes
+                driver = self.Selector_Id(selector)
+                print("Clicl en {} coordenadas {} , {}".format(selector, x, y))
+                mouse = ActionChains(self.driver)
+                mouse.move_to_element_with_offset(driver, x, y).click().perform()
+                t = time.sleep(tiempo)
+                return t
+            except TimeoutException as ex:
+                print(ex.msg)
+                print("No se encontro el elemento: " + selector)
+
+    def Mouse_Click_xy(self, tipo, selector, x, y, tiempo):
+        if (tipo == "xpath"):
+            try:
+                # self.driver.switch_to.frame(0) en caso de tener iframes
+                driver = self.Selector_Xpath(selector)
+                print("Clicl en {} coordenadas {} , {}".format(selector, x, y))
+                mouse = ActionChains(self.driver)
+                mouse.move_to_element_with_offset(driver, x, y).click().perform()
+                t = time.sleep(tiempo)
+                return t
+            except TimeoutException as ex:
+                print(ex.msg)
+                print("No se encontro el elemento: " + selector)
+        if (tipo == "id"):
+            try:
+                # self.driver.switch_to.frame(0) en caso de tener iframes
+                driver = self.Selector_Id(selector)
+                print("Clicl en {} coordenadas {} , {}".format(selector, x, y))
+                mouse = ActionChains(self.driver)
+                mouse.move_to_element_with_offset(driver, x, y).click().perform()
+                t = time.sleep(tiempo)
+                return t
+            except TimeoutException as ex:
+                print(ex.msg)
+                print("No se encontro el elemento: " + selector)
