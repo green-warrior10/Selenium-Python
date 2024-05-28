@@ -222,3 +222,27 @@ class Tests_Funciones:
             except TimeoutException as ex:
                 print(ex.msg)
                 print("No se encontro el elemento: " + selector)
+
+    def Mouse_click_derecho(self, tipo, selector, tiempo):
+        if (tipo == "xpath"):
+            try:
+                driver = self.Selector_Xpath(selector)
+                print("Se esta dando clicl derecho a -> {}".format(selector))
+                mouse = ActionChains(self.driver)
+                mouse.context_click(driver).perform()
+                t = time.sleep(tiempo)
+                return t
+            except TimeoutException as ex:
+                print(ex.msg)
+                print("No se encontro el elemento: " + selector)
+        if (tipo == "id"):
+            try:
+                driver = self.Selector_Id(selector)
+                print("Se esta dando doble click a -> {}".format(selector))
+                mouse = ActionChains(self.driver)
+                mouse.context_click(driver).perform()
+                t = time.sleep(tiempo)
+                return t
+            except TimeoutException as ex:
+                print(ex.msg)
+                print("No se encontro el elemento: " + selector)
