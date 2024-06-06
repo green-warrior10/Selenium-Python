@@ -5,7 +5,7 @@ from Funciones.Archivo_Funciones import Tests_Funciones
 
 t = 1
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="module") #Decorador
 def setup_Login1():
     global driver, f
     print("Inicia test: \n")
@@ -17,7 +17,7 @@ def setup_Login1():
     yield
     print("########### Test finalizado #############")
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="module") # Decorador
 def setup_Login2():
     global driver, f
     print("Inicia test: \n")
@@ -30,17 +30,17 @@ def setup_Login2():
     print("########### Test finalizado #############")
 
 
-def test_Login1(setup_Login1):
+def test_Login1(setup_Login1): #Llamando al decorador
     f = Tests_Funciones(driver)
     f.Texto("xpath", "//input[@id='username']", "student", t)
     f.Texto("xpath", "//input[@id='password']", "Password123", t)
     f.Click("xpath", "//button[@id='submit']", t)
+    driver.close()
 
-@pytest.mark.usefixtures("setup_Login2")
+@pytest.mark.usefixtures("setup_Login2") #Llamando al decorador
 def test_Login2():
     f = Tests_Funciones(driver)
     f.Texto("xpath", "//input[@id='username']", "practice", t)
     f.Texto("xpath", "//input[contains(@id,'password')]", "SuperSecretPassword!", t)
     f.Click("xpath", "//button[contains(@class,'btn btn-bg btn-primary d-block w-100')]", t)
-
-
+    driver.close()
