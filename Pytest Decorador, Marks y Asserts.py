@@ -39,12 +39,12 @@ def setup_Login2():
 @pytest.mark.usefixtures("setup_Login1") #Llamando al decorador
 def test_Login1(): 
     validar = f.Selector_Xpath("//strong[contains(.,'Congratulations student. You successfully logged in!')]").text
-    assert validar=="Congratulations student. You successfully logged in!", "Test correcto"  #Assert que valida si el test es correcto o no
+    assert validar=="Congratulations student. You successfully logged in!", "No hiciste login"  #Assert que valida si el test es correcto o no
     driver.close()
 
 @pytest.mark.LoginB  #Mark
 @pytest.mark.usefixtures("setup_Login2") #Llamando al decorador
 def test_Login2():
     validar = f.Selector_Xpath("//h1[contains(.,'Secure Area')]").text
-    assert validar == "Secure Area", "Test exitoso"   #Assert que valida si el test es correcto o no
+    assert validar == "Secure Area", "No hiciste login"   #Assert que valida si el test es correcto o no
     driver.close()
